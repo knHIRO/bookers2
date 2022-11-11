@@ -6,11 +6,104 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
-  </head>
 
-  <body>
-    <%= yield %>
+  </head>
+<body>
+   <header>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+      <a class="navbar-brand" href="/"><span>Bookers</span></a>
+      <button class="navbar-toggler"
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+<!--        <ul class="navbar-nav ml-auto">-->
+<!--          <li>-->
+<!--            <a class="nav-link text-light" href="/">-->
+<!--              <svg class="svg-inline--fa fa-home fa-w-18" viewBox="0 0 576 512"> <i class="fas fa-home"></i>Home-->
+<!--            </a>-->
+<!--          </li>-->
+<!--          <li>-->
+<!--            <a class="nav-link text-light" href="/homes/about">-->
+<!--              <svg class="svg-inline--fa fa-link fa-w-16" viewBox="0 0 512 512"> <i class="fas fa-link"></i>About-->
+<!--            </a>-->
+<!--          </li>-->
+<!--          <li>-->
+<!--            <a class="nav-link text-light" href="/books">-->
+<!--              <svg class="svg-inline--fa fa-book-open fa-w-18" viewBox="0 0 576 512"> <i class="fas fa-book-open"></i>Books-->
+<!--</a>.       </a>-->
+<!--          </li>-->
+
+        <ul class="navbar-nav ml-auto">
+          <% if user_signed_in? %>
+          <li>
+            <%= link_to user_path(current_user) ,class:"nav-link text-light" do %>
+            <i class="fas fa-home"></i>Home
+            <% end %>
+          </li>
+          <li>
+            <%= link_to users_path ,class:"nav-link text-light" do %>
+            <i class="fas fa-users"></i>Users
+            <% end %>
+          </li>
+          <li>
+            <%= link_to books_path ,class:"nav-link text-light" do %>
+            <i class="fas fa-book-open"></i>Books
+            <% end %>
+          </li>
+          <li>
+           <%= link_to destroy_user_session_path, method: :delete,class:"nav-link text-light" do %>
+           <i class="fas fa-sign-out-alt"></i> Log out
+           <% end %>
+          </li>
+          <% else %>
+          <li>
+            <%= link_to root_path ,class:"nav-link text-light" do %>
+            <i class="fas fa-home"></i> Home
+            <% end %>
+          </li>
+          <li>
+            <%= link_to about_path ,class:"nav-link text-light" do %>
+            <i class="fas fa-link"></i> About
+            <% end %>
+          </li>
+          <li>
+            <%= link_to new_user_registration_path ,class:"nav-link text-light" do %>
+            <i class="fas fa-user-plus"></i> Sign up
+            <% end %>
+          </li>
+          <li>
+           <%= link_to new_user_session_path ,class:"nav-link text-light" do %>
+           <i class="fas fa-sign-in-alt"></i> Log in
+           <% end %>
+          </li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+
+    </header>
+
+    <main>
+    <p id="notice"><%= flash[:notice] %></p>
+      <%= yield %>
+    </main>
+
+
+  <footer>
+  <div class="container mt-5">
+  	<div class="row">
+    	<div class="mx-auto">
+    		<p>CopyRight Infratop.inc</p>
+
+    	</div>
+    </div>
+  </div>
+ </footer>
   </body>
 </html>
